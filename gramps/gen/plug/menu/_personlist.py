@@ -51,3 +51,29 @@ class PersonListOption(Option):
         :return: nothing
         """
         Option.__init__(self, label, "")
+
+    def generate_all_ids_hack(self):
+        """
+        Generates a string of concatenated database IDs
+        in the given hardcoded range. This must be adapted
+        as needed.
+        """
+        ids = []
+        numbers = range(0, 213)  # HACK your IDs here
+        for number in numbers:
+            if number < 10:
+                ids.append(f"I000{number}")
+                continue
+            if number < 100:
+                ids.append(f"I00{number}")
+                continue
+            if number < 1000:
+                ids.append(f"I0{number}")
+                continue
+            # Add additional cases here!
+        return " ".join(ids)
+
+    def set_value(self, value):
+        ids = self.generate_all_ids_hack()
+        print(f"{ids}")
+        super().set_value(ids)
